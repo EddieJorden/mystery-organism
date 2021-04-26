@@ -15,36 +15,40 @@ const mockUpStrand = () => {
 };
 
 const pAequorFactor = (num, arr) => {
-	// console.log('num', num);
 	console.log('arr', arr);
+	let passedInArr = arr;
 
 	return {
 		speceminNum: num,
 		dna: arr,
 		mutate() {
-			randomIndex = Math.floor(Math.random() * arr.length);
-			randomBase = returnRandBase();
-			currentValue = arr[i];
-			newDna = [];
-			for (let i = 0; i < arr.length; i++) {
-				if (i === randomIndex && arr[i] !== randomBase) {
-					currentValue = randomBase;
-				} else
-					for (let i = 0; i < arr.length; i++) {
-						if (i === randomIndex && i !== randomBase) {
-							currentValue = randomBase;
-							newDna = arr.splice(i, 1, currentValue);
-						}
-						console.log('newDna', newDna);
-					}
-			}
+			let randomIndex = Math.floor(Math.random() * passedInArr.length);
+			let newSplicedArr = [];
+			for (let i = 0; i < passedInArr.length; i++) {
+				let currentBase = passedInArr[i];
 
-			return newDna;
+				if (
+					passedInArr[i] === randomIndex &&
+					currentBase[i] !== returnRandBase
+				) {
+					returnedModifiedArray = passedInArr.splice(1, 1, returnRandBase);
+					newSplicedArr.push(returnedModifiedArray);
+				} else {
+					for (let j = currentBase; j < passedInArr.length; j++) {
+						if (
+							passedInArr[i] === randomIndex &&
+							currentBase[i] !== returnRandBase
+						) {
+							newSplicedArr.push(passedInArr.splice(1, 1, returnRandBase));
+						}
+					}
+					console.log(newSplicedArr);
+				}
+			}
+			console.log('newSplicedArr', newSplicedArr);
 		},
 	};
 };
-// console.log('this.speceminNum', this.speceminNum);
 
-// console.log('mockUpStrand', mockUpStrand());
-
-console.log(pAequorFactor(1, mockUpStrand()));
+console.log(pAequorFactor(1, mockUpStrand()).mutate());
+console.log('pAequorFactor.mutate', pAequorFactor.mutate);
