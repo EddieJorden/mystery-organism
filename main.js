@@ -14,8 +14,8 @@ const mockUpStrand = () => {
 };
 
 const pAequorFactor = (num, arr) => {
-	console.log('arr', arr);
 	let passedInArr = arr;
+	console.log('passedInArr', passedInArr);
 
 	return {
 		speceminNum: num,
@@ -30,7 +30,7 @@ const pAequorFactor = (num, arr) => {
 			for (let i = 0; i < passedInArr.length; i++) {
 				let currentBase = passedInArr[i];
 
-				if (passedInArr[i] === randomIndex && currentBase[i] !== randomBase) {
+				if (passedInArr[i] === randomIndex && currentBase !== randomBase) {
 					returnedModifiedArray = passedInArr.splice(
 						passedInArr[i],
 						1,
@@ -55,9 +55,9 @@ const pAequorFactor = (num, arr) => {
 				}
 			}
 			// console.log('newSplicedArr', newSplicedArr);
-			console.log(returnedModifiedArray);
 		},
 	};
 };
 
 console.log(pAequorFactor(1, mockUpStrand()).mutate());
+// console.log(returnedModifiedArray);
