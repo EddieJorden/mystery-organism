@@ -20,9 +20,7 @@ const pAequorFactor = (num, arr) => {
 		mutate(arrToModify) {
 			const passedInArr = arrToModify.slice();
 			let randomIndex = Math.floor(Math.random() * passedInArr.length - 1);
-			let newSplicedArr = [];
 			let randomBase = returnRandBase();
-			let returnedModifiedArray = [];
 
 			console.log('randomBase', randomBase);
 			for (let i = 0; i < passedInArr.length; i++) {
@@ -40,17 +38,37 @@ const pAequorFactor = (num, arr) => {
 							passedInArr.splice(j, 1, randomBase);
 						}
 					}
-					// console.log(newSplicedArr);
 				}
 			}
 			return passedInArr;
+		},
+		compareDna(pAequor) {
+			const ex1 = newStrand;
+			console.log('ex1', ex1);
+			const ex2 = pAequor;
+			console.log('ex2', ex2);
+			let identicalBase = 0;
+			console.log('identicalBase', identicalBase);
 
-			// console.log('newSplicedArr', newSplicedArr);
+			for (let i = 0; i < ex2.length - 1; i++) {
+				if (i === ex1[i]) {
+					identicalBase + 1;
+				}
+			}
+			let commonDna = ((identicalBase / (ex1.length - 1)) * 100).toFixed(1);
+
+			return commonDna;
 		},
 	};
 };
 const newStrand = mockUpStrand();
-console.log(newStrand);
+console.log('newStrand', newStrand);
 
-console.log(pAequorFactor(1, newStrand).mutate(newStrand));
+console.log(
+	'pAequorFactor.mutate()',
+	pAequorFactor(1, newStrand).mutate(newStrand)
+);
+
+console.log(pAequorFactor().compareDna(newStrand));
+
 // console.log(returnedModifiedArray);
