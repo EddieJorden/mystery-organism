@@ -20,6 +20,7 @@ const pAequorFactor = (num, arr) => {
 	return {
 		speceminNum: num,
 		dna: arr,
+
 		mutate(arrToModify) {
 			const mutatedArray = arrToModify.slice();
 			let randomIndex = Math.floor(Math.random() * mutatedArray.length - 1);
@@ -51,18 +52,17 @@ const pAequorFactor = (num, arr) => {
 			console.log('ex1[0]', ex1[0]);
 			const ex2 = pAequor;
 			console.log('ex2', ex2);
-			let identicalBase = 0;
-			console.log('identicalBase', identicalBase);
-			const acc = null;
+			let acc = 0;
 
 			for (let i = 0; i < ex2.length - 1; i++) {
 				if (ex2[i] === ex1[i]) {
-					let sameBase = identicalBase + 1;
+					acc += 1;
 					// acc.push(sameBase);
 					// console.log('sameBase', sameBase);
 				}
 			}
-			let commonDna = ((identicalBase / (ex1.length - 1)) * 100).toFixed(1);
+			console.log('acc', acc);
+			let commonDna = ((acc / (ex1.length - 1)) * 100).toFixed(0);
 
 			return commonDna;
 		},
