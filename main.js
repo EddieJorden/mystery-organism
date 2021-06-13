@@ -4,6 +4,9 @@ const returnRandBase = () => {
 	return dnaBases[Math.floor(Math.random() * 4)];
 };
 
+const randomBase = returnRandBase();
+// console.log('randomBase', randomBase);
+
 // Returns a random single stand of DNA containing 15 bases
 const mockUpStrand = () => {
 	const newStrand = [];
@@ -21,22 +24,27 @@ const pAequorFactor = (num, arr) => {
 		speceminNum: num,
 		dna: arr,
 
-		mutate(arrToModify) {
-			const mutatedArray = arrToModify.slice();
-			let randomIndex = Math.floor(Math.random() * mutatedArray.length - 1);
+		mutate(object) {
+			let mutatedObject = {
+				speceminNum: num,
+				dna: object.dna.slice(),
+			};
+			// mutedObject.dna = object.dna.slice();
+
+			// let mutatedDna = object.dna.slice();
+			let randomIndex = Math.floor(Math.random() * object.dna.length - 1);
 			let randomBase = returnRandBase();
 
-			console.log('randomBase', randomBase);
-			for (let i = 0; i < mutatedArray.length; i++) {
-				let currentBase = mutatedArray[i];
+			for (let i = 0; i < object.dna.length; i++) {
+				let currentBase = object.dna[i];
 
 				if (i === randomIndex && currentBase !== randomBase) {
-					mutatedArray.splice(i, 1, randomBase);
+					object.dna.splice(i, 1, randomBase);
 				} else {
 					let newRandomIndex = Math.floor(
-						Math.random() * mutatedArray.length - 1
+						Math.random() * object.dna.length - 1
 					);
-					for (let j = currentBase; j < mutatedArray.length; j++) {
+					for (let j = currentBase; j < object.dna.length; j++) {
 						let currentBase = passedInArr[j];
 						if (j === newRandomIndex && currentBase !== randomBase) {
 							passedInArr.splice(j, 1, randomBase);
@@ -44,14 +52,17 @@ const pAequorFactor = (num, arr) => {
 					}
 				}
 			}
-			return mutatedArray;
+			return mutatedObject;
 		},
+
+		// .mutate() seems to be working as expected :) ==ej==
+
 		compareDna(pAequor) {
-			const ex1 = newStrand;
+			const ex1 = this.dna;
 			console.log('ex1', ex1);
-			console.log('ex1[0]', ex1[0]);
-			const ex2 = pAequor;
-			console.log('ex2', ex2);
+			// console.log('ex1[0]', ex1[0]);
+			const ex2 = mutatedObject.dna;
+			// console.log('ex2', ex2);
 			let acc = 0;
 
 			for (let i = 0; i < ex2.length - 1; i++) {
@@ -61,19 +72,63 @@ const pAequorFactor = (num, arr) => {
 					// console.log('sameBase', sameBase);
 				}
 			}
-			console.log('acc', acc);
+
 			let commonDna = ((acc / (ex1.length - 1)) * 100).toFixed(0);
 
-			return commonDna;
+			const comparedDnaReturn =
+				'the total percentage of equal dna bases is ' + commonDna + ' percent';
+
+			return comparedDnaReturn;
+		},
+
+		willLikelySurvive(object) {
+			let acc = 0;
+			for (let i = 0; i < object.dna.length - 1; i++) {
+				let currentBase = object.dna[i];
+				let cBase = 'C';
+				let gBase = 'G';
+				console.log(currentBase);
+				if (currentBase == cBase || currentBase == gBase) {
+					acc = acc + 1;
+					console.log(acc);
+				}
+			}
+			console.log(object.dna.length);
+			console.log(acc);
+
+			if ((acc / object.dna.length) * 100 >= 60) {
+				return true;
+			} else return false;
+		},
+
+		// generatePaequor not working
+
+		generatePAequor() {
+			let likelySurvivors = [];
+
+			for (let i = 0; i < 31; i++) {
+				let newRandomAequor = {
+					speceminNum: i,
+					dna: newStrand,
+				};
+			}
+			return newRandomAequor;
 		},
 	};
 };
 
-console.log(
-	'pAequorFactor.mutate()',
-	pAequorFactor(1, newStrand).mutate(newStrand)
-);
+const pAequorObject = pAequorFactor(1, newStrand);
+// const newPAequorObject = pAequorFactor(2, newStrand);
 
-console.log(
-	pAequorFactor().compareDna(pAequorFactor(1, newStrand).mutate(newStrand))
-);
+const mutatedObject = pAequorObject.mutate(pAequorObject);
+
+const compareDna = pAequorObject.compareDna(mutatedObject);
+
+const likelySurvivor = pAequorObject.willLikelySurvive(mutatedObject);
+
+// const generatedPAequor = pAequorFactor.generatePAequor();
+
+console.log('pAequorObject', pAequorObject);
+console.log('mutatedObject', mutatedObject);
+console.log('compareDna', compareDna);
+console.log('likelySurvivor', likelySurvivor);
