@@ -113,23 +113,25 @@ const compareDna = pAequorObject.compareDna(mutatedObject);
 const likelySurvivor = pAequorObject.willLikelySurvive(mutatedObject);
 
 // not working,  willLikelySurvive method is not available (out of scope)
-// const generateSurvivingPaequor = (obj) => {
-// 	let pAequorArray = [];
-// 	for (let i = 0; pAequorArray.length <= 30; i++) {
-// 		let randomPAequorObject = {
-// 			speceminNum: i,
-// 			dna: newStrand,
-// 		};
-// 		if (obj.willLikelySurvive(randomPAequorObject) === true) {
-// 			pAequorArray.push(randomPAequorObject);
-// 		}
-// 	}
-// 	return pAequorArray;
-// };
+const generateSurvivingPaequor = (obj) => {
+	let pAequorArray = [];
+
+	for (let i = 0; pAequorArray.length <= 30; i++) {
+		let randomDna = newStrand;
+		let randomPAequorObject = {
+			speceminNum: i,
+			dna: randomDna,
+		};
+		if (obj.willLikelySurvive(randomPAequorObject) === true) {
+			pAequorArray.push(randomPAequorObject);
+		}
+	}
+	return pAequorArray;
+};
 
 console.log('pAequorObject', pAequorObject);
 console.log('mutatedObject', mutatedObject);
 console.log('compareDna', compareDna);
 console.log('likelySurvivor', likelySurvivor);
-// console.log(generateSurvivingPaequor(pAequorFactor));
+console.log(generateSurvivingPaequor(pAequorObject));
 // console.log('generatePaequor()', generatePaequor(pAequorObject));
