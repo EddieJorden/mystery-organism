@@ -17,7 +17,6 @@ const mockUpStrand = () => {
 };
 
 const newStrand = mockUpStrand();
-console.log('newStrand', newStrand);
 
 const pAequorFactor = (num, arr) => {
 	return {
@@ -59,7 +58,7 @@ const pAequorFactor = (num, arr) => {
 
 		compareDna(pAequor) {
 			const ex1 = this.dna;
-			console.log('ex1', ex1);
+
 			// console.log('ex1[0]', ex1[0]);
 			const ex2 = mutatedObject.dna;
 			// console.log('ex2', ex2);
@@ -87,14 +86,11 @@ const pAequorFactor = (num, arr) => {
 				let currentBase = object.dna[i];
 				let cBase = 'C';
 				let gBase = 'G';
-				console.log(currentBase);
+
 				if (currentBase == cBase || currentBase == gBase) {
 					acc = acc + 1;
-					console.log(acc);
 				}
 			}
-			console.log(object.dna.length);
-			console.log(acc);
 
 			if ((acc / object.dna.length) * 100 >= 60) {
 				return true;
@@ -108,7 +104,7 @@ const pAequorObject = pAequorFactor(1, newStrand);
 
 const mutatedObject = pAequorObject.mutate(pAequorObject);
 
-const compareDna = pAequorObject.compareDna(mutatedObject);
+const compareDna = pAequorObject.compareDna(pAequorObject);
 
 const likelySurvivor = pAequorObject.willLikelySurvive(mutatedObject);
 
@@ -117,7 +113,7 @@ const generateSurvivingPaequor = (obj) => {
 	let pAequorArray = [];
 
 	for (let i = 0; pAequorArray.length <= 30; i++) {
-		let randomDna = newStrand;
+		let randomDna = mockUpStrand();
 		let randomPAequorObject = {
 			speceminNum: i,
 			dna: randomDna,
@@ -133,5 +129,7 @@ console.log('pAequorObject', pAequorObject);
 console.log('mutatedObject', mutatedObject);
 console.log('compareDna', compareDna);
 console.log('likelySurvivor', likelySurvivor);
-console.log(generateSurvivingPaequor(pAequorObject));
-// console.log('generatePaequor()', generatePaequor(pAequorObject));
+console.log(
+	'generateSurvivingPaequor(pAequorObject)',
+	generateSurvivingPaequor(pAequorObject)
+);
