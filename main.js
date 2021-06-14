@@ -100,20 +100,6 @@ const pAequorFactor = (num, arr) => {
 				return true;
 			} else return false;
 		},
-
-		// generatePaequor not working
-
-		generatePAequor() {
-			let likelySurvivors = [];
-
-			for (let i = 0; i < 31; i++) {
-				let newRandomAequor = {
-					speceminNum: i,
-					dna: newStrand,
-				};
-			}
-			return newRandomAequor;
-		},
 	};
 };
 
@@ -126,9 +112,24 @@ const compareDna = pAequorObject.compareDna(mutatedObject);
 
 const likelySurvivor = pAequorObject.willLikelySurvive(mutatedObject);
 
-// const generatedPAequor = pAequorFactor.generatePAequor();
+// not working,  willLikelySurvive method is not available (out of scope)
+// const generateSurvivingPaequor = (obj) => {
+// 	let pAequorArray = [];
+// 	for (let i = 0; pAequorArray.length <= 30; i++) {
+// 		let randomPAequorObject = {
+// 			speceminNum: i,
+// 			dna: newStrand,
+// 		};
+// 		if (obj.willLikelySurvive(randomPAequorObject) === true) {
+// 			pAequorArray.push(randomPAequorObject);
+// 		}
+// 	}
+// 	return pAequorArray;
+// };
 
 console.log('pAequorObject', pAequorObject);
 console.log('mutatedObject', mutatedObject);
 console.log('compareDna', compareDna);
 console.log('likelySurvivor', likelySurvivor);
+// console.log(generateSurvivingPaequor(pAequorFactor));
+// console.log('generatePaequor()', generatePaequor(pAequorObject));
